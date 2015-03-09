@@ -13,3 +13,6 @@
 [submodule ".emacs.d/elisp/nxhtml"]
 	path = .emacs.d/elisp/nxhtml
 	url = git@github.com:emacsmirror/nxhtml.git
+[submodule ".emacs.d/elisp/ruby-electric"]
+	path = .emacs.d/elisp/ruby-electric
+	url = https://github.com/qoobaa/ruby-electric.git
