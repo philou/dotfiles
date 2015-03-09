@@ -7,3 +7,6 @@
 [submodule ".emacs.d/elisp/emacs_chrome"]
 	path = .emacs.d/elisp/emacs_chrome
 	url = https://github.com/stsquad/emacs_chrome.git
+[submodule ".emacs.d/elisp/graphviz-dot-mode"]
+	path = .emacs.d/elisp/graphviz-dot-mode
+	url = https://github.com/ppareit/graphviz-dot-mode.git
