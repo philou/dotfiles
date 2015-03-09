@@ -4,3 +4,6 @@
 [submodule ".emacs.d/elisp/coffee-mode"]
 	path = .emacs.d/elisp/coffee-mode
 	url = https://github.com/defunkt/coffee-mode.git
+[submodule ".emacs.d/elisp/emacs_chrome"]
+	path = .emacs.d/elisp/emacs_chrome
+	url = https://github.com/stsquad/emacs_chrome.git
