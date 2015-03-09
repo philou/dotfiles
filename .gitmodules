@@ -1,3 +1,6 @@
 [submodule ".emacs.d/elisp/cucumber.el"]
 	path = .emacs.d/elisp/cucumber.el
 	url = https://github.com/michaelklishin/cucumber.el.git
+[submodule ".emacs.d/elisp/coffee-mode"]
+	path = .emacs.d/elisp/coffee-mode
+	url = https://github.com/defunkt/coffee-mode.git
