@@ -10,3 +10,6 @@
 [submodule ".emacs.d/elisp/graphviz-dot-mode"]
 	path = .emacs.d/elisp/graphviz-dot-mode
 	url = https://github.com/ppareit/graphviz-dot-mode.git
+[submodule ".emacs.d/elisp/nxhtml"]
+	path = .emacs.d/elisp/nxhtml
+	url = git@github.com:emacsmirror/nxhtml.git
