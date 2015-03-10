@@ -1,3 +1,20 @@
+;; Install favourite packages
+(require 'package)
+(package-initialize)
+
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+
+(setq package-list '(coffee-mode edit-server feature-mode graphviz-dot-mode ruby-electric))
+
+(unless package-archive-contents
+  (package-refresh-contents))
+
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
+
+;; General settings
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -13,6 +30,11 @@
 
 ;; remove toolbar
 (tool-bar-mode -1)
+
+;; editing defaults
+(setq tab-width 2)
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
 
 ;; rebinding hippie-expand
 (global-unset-key [M-/])
@@ -35,8 +57,8 @@
 (global-set-key [(control c) (control f)] 'indent-region)
 
 ;; comment/uncomment region
-(global-set-key [(control :)] 'comment-region)
-(global-set-key [(control /)] 'uncomment-region)
+(global-set-key [(control /)] 'comment-region)
+(global-set-key [(control :)] 'uncomment-region)
 
 ;; text defaults
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -64,23 +86,10 @@
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (setq js-indent-level 2)
 
-;; cucumber.el -- Emacs mode for editing plain text user stories
-(add-to-list 'load-path "~/.emacs.d/elisp/cucumber.el")
-;; optional configurations
-;; default language if .feature doesn't have "# language: fi"
-;(setq feature-default-language "fi")
-;; point to cucumber languages.yml or gherkin i18n.yml to use
-;; exactly the same localization your cucumber uses
-;(setq feature-default-i18n-file "/path/to/gherkin/gem/i18n.yml")
-;; and load feature-mode
-(require 'feature-mode)
-(add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
-
 ;; rdebug.el -- emacs ruby debugging
-(require 'rdebug)
+;;(require 'rdebug)
 
 ;; associate ruby mode with other ruby extesions
-(add-to-list 'load-path "~/.emacs.d/elisp/ruby-electric/")
 (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\.rake$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\.gemspec$" . ruby-mode))
@@ -91,13 +100,9 @@
 (add-hook 'ruby-mode-hook
           (lambda()
             (imenu-add-to-menubar "IMENU")
-            (require 'ruby-electric)
             (ruby-electric-mode t)
             ))
 
-(put 'upcase-region 'disabled nil)
-
-(put 'downcase-region 'disabled nil)
 
 ;; nXhtml mode
 (load "~/.emacs.d/elisp/nxhtml/autostart.el")
@@ -110,54 +115,13 @@
  nxml-degraded t)
 (add-to-list 'auto-mode-alist '("\.html\.erb$" . eruby-nxhtml-mumamo-mode))
 
-;; coffee script mode
-(setq tab-width 2)
-(load "~/.emacs.d/elisp/coffee-mode/coffee-mode.el")
-
-
-;;;; radiant mode
-;;;; updates radiant db and restarts the radiant serveron file save
-
-;; the radiant process
-(defvar radiant-process)
-
-(defun radiant-stop()
-  "Stops the radiant cms server process"
-  (if (boundp 'radiant-process)
-      (progn
-        (delete-process radiant-process)
-        (makunbound 'radiant-process))))
-
-(defun radiant-refresh()
-  "Stops the current radiant server, updates the db with local changes, and restarts the server"
-  (if (not (boundp 'radiant-process))
-      (let ((default-directory "/home/philou/Code/mes-courses.fr/cms/"))
-        (call-process "rake" nil "*radiant*" t "fs:to_db")
-        (setq radiant-process (start-process "radiant-cms" "*radiant*" "ruby" "script/server")))))
-
-(defun radiant-mode()
-  "Restarts the radiant cms server on file save"
-  (interactive)
-  (progn
-    (get-buffer-create "*radiant*")
-    (add-hook 'before-save-hook 'radiant-stop t t)
-    (add-hook 'after-save-hook 'radiant-refresh t t)))
-
-(defun radiant-mode-exit()
-  "Stops radiant cms restart on file save"
-  (interactive)
-  (progn
-    (remove-hook 'before-save-hook 'radiant-stop t t)
-    (remove-hook 'after-save-hook 'radiant-refresh t t)
-    (radiant-stop)))
-
-(add-to-list 'load-path "~/.emacs.d/elisp/emacs_chrome/servers/")
-(when (and (require 'edit-server nil t) (daemonp))
+;; Edit from chrome
+(when (daemonp)
   (edit-server-start))
 
 ;; graphviz mod
-(add-to-list 'load-path "~/.emacs.d/elisp/graphviz-dot-mode/")
-(require 'graphviz-dot-mode)
+(add-to-list 'auto-mode-alist '("\.gv$" . graphviz-dot-mode))
+(add-to-list 'auto-mode-alist '("\.dot$" . graphviz-dot-mode))
 
 (add-hook 'graphviz-dot-mode-hook
           (lambda ()
