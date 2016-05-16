@@ -6,7 +6,8 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 
-(setq package-list '(coffee-mode edit-server feature-mode graphviz-dot-mode ruby-electric))
+; Packages to auto-install
+(setq package-list '(coffee-mode edit-server feature-mode graphviz-dot-mode ruby-electric markdown-mode))
 
 (unless package-archive-contents
   (package-refresh-contents))
