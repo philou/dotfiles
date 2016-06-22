@@ -33,3 +33,5 @@ tramp
 
 # session files
 .emacs.d/session*
+
+nohup.out
