@@ -128,3 +128,6 @@
 (add-hook 'graphviz-dot-mode-hook
           (lambda ()
             (add-hook 'after-save-hook 'recompile nil 'make-it-local)))
+
+;; markdown mode
+(setq markdown-command "docker run -i -v ${PWD}:/work/ pbourgau/docker-grip-export grip --export -")
