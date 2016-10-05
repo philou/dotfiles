@@ -7,7 +7,7 @@
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 
 ; Packages to auto-install
-(setq package-list '(coffee-mode edit-server feature-mode graphviz-dot-mode ruby-electric markdown-mode yaml-mode))
+(setq package-list '(coffee-mode edit-server feature-mode graphviz-dot-mode ruby-electric markdown-mode yaml-mode dockerfile-mode))
 
 (unless package-archive-contents
   (package-refresh-contents))
