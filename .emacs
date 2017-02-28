@@ -6,29 +6,22 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 
-; Packages to auto-install
-(setq package-list '(coffee-mode edit-server feature-mode graphviz-dot-mode ruby-electric markdown-mode yaml-mode dockerfile-mode))
-
 (unless package-archive-contents
   (package-refresh-contents))
 
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
-
 ;; General settings
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (dockerfile-mode yaml-mode markdown-mode ruby-electric graphviz-dot-mode feature-mode edit-server coffee-mode)))
  '(safe-local-variable-values (quote ((encoding . utf-8)))))
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 82 :width normal :foundry "unknown" :family "DejaVu Sans Mono")))))
+
+;; install packages
+(package-install-selected-packages)
 
 ;; remove toolbar
 (tool-bar-mode -1)
