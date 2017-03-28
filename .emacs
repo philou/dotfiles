@@ -23,6 +23,12 @@
 ;; install packages
 (package-install-selected-packages)
 
+;; cursor jump on mac
+(global-set-key (kbd "s-<right>") 'move-end-of-line)
+(global-set-key (kbd "s-<left>") 'move-beginning-of-line)
+(global-set-key (kbd "s-<up>") 'beginning-of-buffer)
+(global-set-key (kbd "s-<down>") 'end-of-buffer)
+
 ;; remove toolbar
 (tool-bar-mode -1)
 
@@ -38,8 +44,8 @@
 
 ;; Confirmation before quit
 (defun secure-kill-emacs(confirm)
-        (interactive "Are you really sure you want to kill emacs now ? (y or n)")
-        (if (string-equal "y" confirm) (command-execute 'save-buffers-kill-emacs)))
+  (interactive "Are you really sure you want to kill emacs now ? (y or n)")
+  (if (string-equal "y" confirm) (command-execute 'save-buffers-kill-emacs)))
 (global-set-key "\C-x\C-c" 'secure-kill-emacs)
 
 ;; Type 'y' instead of 'yes'
@@ -48,12 +54,12 @@
 ;; automaticaly revert buffers if changed on disk
 (global-auto-revert-mode)
 
-;; C-M-\ is inaccessible on windows ...
+;; C-M-\ is inaccessible on azerty ...
 (global-set-key [(control c) (control f)] 'indent-region)
 
 ;; comment/uncomment region
 (global-set-key [(control /)] 'comment-region)
-(global-set-key [(control :)] 'uncomment-region)
+(global-set-key [(control \?)] 'uncomment-region)
 
 ;; text defaults
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
